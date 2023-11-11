@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const File = require('../models/File')
 const mongoose = require('mongoose')
 
@@ -20,10 +22,12 @@ const getFile = async (req, res) => {
 }
 
 const createFile = async (req, res) => {
-    const {filename, size} = req.body
+    const filename = req.file.key
+    const size = req.file.size
+    const path = req.file.location
     const uploadDate = Date.now()
     try {
-        const file = File.create({filename, size, uploadDate})
+        const file = File.create({filename, size, path, uploadDate})
         res.status(200).json(file)
     } catch (error) {
         res.status(400).json({error: error.message})

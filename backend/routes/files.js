@@ -6,6 +6,7 @@ const {
     getFile,
     deleteFile
 } = require('../controllers/fileController')
+const upload = require('../middleware/upload')
 
 const router = express.Router()
 
@@ -16,7 +17,7 @@ router.get('/', getFiles)
 router.get('/:id', getFile)
 
 // POST a new file
-router.post('/', createFile)
+router.post('/', upload.single('file'), createFile)
 
 // DELETE file
 router.delete('/:id', deleteFile)

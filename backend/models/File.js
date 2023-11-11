@@ -11,6 +11,10 @@ const fileSchema = new Schema({
         type: Number,
         required: true
     },
+    path: {
+        type: String,
+        required: true
+    },
     uploadDate: {
         type: Date,
         required: true
