@@ -1,13 +1,6 @@
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const { S3Client } = require('@aws-sdk/client-s3')
-const aws = require('aws-sdk')
-
-aws.config.update({
-    accessKeyId: process.env.accessKeyId,
-    secretAccessKey: process.env.secretAccessKey,
-    region: process.env.region
-})
 
 const s3 = new S3Client({
     region: process.env.region,
@@ -15,7 +8,7 @@ const s3 = new S3Client({
         accessKeyId: process.env.accessKeyId,
         secretAccessKey: process.env.secretAccessKey
     },
-    sslEnabled: false,
+    sslEnabled: false
 })
 
 const upload = multer({
