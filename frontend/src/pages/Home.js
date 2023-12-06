@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
+import Popup from 'reactjs-popup';
 
 const Home = () => {
 
     const [file, setFile] = useState(null)
     const [files, setFiles] = useState(null)
+    const [signedUrl, setSignedUrl] = useState('')
+    const [fileId, setFileId] = useState('')
 
     useEffect (() => {
         const fetchFiles = async () => {
@@ -37,6 +40,12 @@ const Home = () => {
         }
     }
     
+    const handleClick = async (file) => {
+        setFileId(file._id)
+        const response = await fetch('http://localhost:4000/api/files/' + file._id)
+        const json = await response.json()
+        setSignedUrl(json.url)
+    }
 
     return (
         <div className="home">
@@ -53,7 +62,33 @@ const Home = () => {
             </form>
             <div className="files">
                 {files && files.map((file) => (
-                    <div className="files-list" key={file._id}>{file.filename}</div>
+                    <Popup onOpen={() => {
+                        handleClick(file);
+                    }} 
+                    onClose={() => {
+                        setFileId('')
+                        setSignedUrl('')
+                    }}
+                    trigger =
+                    {
+                        <div 
+                        className="files-list"
+                        key={file._id}>
+                            {file.filename}
+                        </div>
+                        
+                    }
+                    >
+                        <div className="popup-content">
+                            {signedUrl ? (
+                                <img src={signedUrl} alt="file"></img>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                            
+                        </div>
+                        
+                    </Popup>
                 ))}
             </div>
         </div>
