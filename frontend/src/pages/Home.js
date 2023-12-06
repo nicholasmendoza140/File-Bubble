@@ -1,8 +1,20 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const Home = () => {
 
     const [file, setFile] = useState(null)
+    const [files, setFiles] = useState(null)
+
+    useEffect (() => {
+        const fetchFiles = async () => {
+            const response = await fetch('http://localhost:4000/api/files')
+            const json = await response.json()
+            if (response.ok) {
+                setFiles(json)
+            }
+        }
+        fetchFiles()
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -39,6 +51,11 @@ const Home = () => {
                     handleSubmit();
                 }} />
             </form>
+            <div className="files">
+                {files && files.map((file) => (
+                    <div className="files-list" key={file._id}>{file.filename}</div>
+                ))}
+            </div>
         </div>
     )
 }

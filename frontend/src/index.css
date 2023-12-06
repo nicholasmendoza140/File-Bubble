@@ -11,18 +11,43 @@ body {
 input[type="file"] {
   display: none;
 }
+.home {
+  display: grid;
+  grid-template-columns: 0.4fr 2fr;
+}
 .uploadForm {
-  padding: 20px;
+  padding: 10px 30px;
 }
 .file-upload {
-    border: 1px solid #ccc;
-    display: flex;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 8px;
-    align-items: center;
-    width: 80px;
+  border: 1px solid #505050;
+  display: flex;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  align-items: center;
+  width: 80px;
+  box-shadow: 0 2px 8px #242424;
 }
 .icon-and-text {
   vertical-align: middle;
+}
+header .container {
+  padding: 30px;
+  display: flex;
+}
+.nav-left {
+  font-size: 30px;
+}
+.files {
+  width: 65%;
+  margin: 10px auto;
+  margin-left: -20px;
+}
+.files-list {
+  margin: 10px auto;
+  padding: 10px;
+  padding-left: 20px;
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid #505050;
 }
