@@ -62,7 +62,7 @@ const Home = () => {
             </form>
             <div className="files">
                 {files && files.map((file) => (
-                    <Popup onOpen={() => {
+                    <Popup className="popup" position="fixed" arrow={false} onOpen={() => {
                         handleClick(file);
                     }} 
                     onClose={() => {
@@ -79,14 +79,21 @@ const Home = () => {
                         
                     }
                     >
-                        <div className="popup-content">
+                        {close => (
+                            <div className="popup-content">
                             {signedUrl ? (
-                                <img src={signedUrl} alt="file"></img>
+                                <img src={signedUrl} alt="file" className="popup-image"></img>
                             ) : (
                                 <p>Loading...</p>
                             )}
+                                <button className="close-button" onClick={close}>
+                                    <i className="material-icons">close</i>
+                                </button>
+                            </div>
                             
-                        </div>
+                                
+                        )}
+                        
                         
                     </Popup>
                 ))}
